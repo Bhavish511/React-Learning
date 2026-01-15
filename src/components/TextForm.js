@@ -6,21 +6,36 @@ export default function TextForm(props) {
         // console.log("upper btn clicked");
         setText(text.toUpperCase());
     }
+    const handleLoClick = () => {
+        // console.log("Lower btn clicked");
+        setText(text.toLowerCase());
+    }
     const handleOnChange = (event) => {
         setText(event.target.value);
         // console.log("Handle on change clicked");
     }
-    const [text, setText] = useState('Enter the text here');
+    const [text, setText] = useState('');
     // text = "New text"; // Wrong way to change the state variable
     // setText("New text"); // Correct way to change the state variable
 
   return (
-    <div>
-        <h1>{props.heading}</h1>    
-        <div className="mb-3">
-        <textarea className="form-control" id="myBox" rows="8" value={text} onChange={handleOnChange}></textarea>
+    <>
+        <div className="container">
+            <h1>{props.heading}</h1>    
+            <div className="mb-3">
+            <textarea className="form-control" id="myBox" rows="8" value={text} onChange={handleOnChange}></textarea>
+            </div>
+            <button className="btn btn-success mx-1" onClick={handleUpClick}>Convert to Uppercase</button>
+            <button className="btn btn-success mx-1" onClick={handleLoClick}>Convert to Lowercase</button>
         </div>
-        <button className="btn btn-primary" onClick={handleUpClick}>Convert to Uppercase</button>
-    </div>
+        <div className="container">
+            <h2>Your text summary</h2>
+            <p>{text.split("").length ? text.split(" ").length : 0} words and {text.length} characters</p>
+            <p>{0.008 * (text.split("").length ? text.split(" ").length : 0)} Minutes read</p>
+            <h2>Preview</h2>
+            <p>{text.length>0 ? text : "Nothing to preview!"}</p>
+            
+        </div>
+    </>
   )
 }
