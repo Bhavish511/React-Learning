@@ -36,6 +36,8 @@ export default function TextForm(props) {
     // text = "New text"; // Wrong way to change the state variable
     // setText("New text"); // Correct way to change the state variable
 
+
+
   return (
     <>
         <div className="container" style={{color: props.mode==='dark' ?'white':'#042743'}}>
