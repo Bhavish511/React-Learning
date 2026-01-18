@@ -23,7 +23,18 @@ function App() {
       setAlert(null);
     }, 1500);
   };
-  const toggleMode = () => {
+
+  const removeBodyClasses = () => {
+    document.body.classList.remove('bg-light');
+    document.body.classList.remove('bg-dark');
+    document.body.classList.remove('bg-warning');
+    document.body.classList.remove('bg-danger');
+    document.body.classList.remove('bg-success');
+    document.body.classList.remove('bg-primary');
+  }
+  const toggleMode = (cls) => {
+    console.log(cls)
+    removeBodyClasses();
     if(mode === 'light'){
       setMode('dark');
       document.body.style.backgroundColor = '#042743';
@@ -37,14 +48,19 @@ function App() {
       //   document.title = "TextUtils is Amazing Mode";
       // }, 2000);
       // setInterval(() => {
-      //   document.title = "Install TextUtils Now";
-      // }, 1500);  
+        //   document.title = "Install TextUtils Now";
+        // }, 1500);  
     }
-    else{
+    else if(mode === 'dark'){
       setMode('light');
       document.body.style.backgroundColor = 'white';
       setAlertMessage("Light mode has been enabled", "success");
       document.title = "TextUtils - Light Mode";
+    }
+    else {
+      document.body.classList.add('bg-' + cls);
+      setMode(cls);
+      setAlertMessage(`${cls.charAt(0).toUpperCase() + cls.slice(1)} mode has been enabled`, "success");
     }
   } 
   return (
