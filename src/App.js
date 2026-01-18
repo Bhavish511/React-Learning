@@ -23,7 +23,16 @@ function App() {
       setAlert(null);
     }, 1500);
   };
-  const toggleMode = () => {
+  const removeBodyClasses = () => {
+    document.body.classList.remove('bg-light');
+    document.body.classList.remove('bg-dark');
+    document.body.classList.remove('bg-warning');
+    document.body.classList.remove('bg-danger');
+    document.body.classList.remove('bg-success');
+    document.body.classList.remove('bg-primary');
+  }
+  const toggleMode = (cls) => {
+    removeBodyClasses();
     if(mode === 'light'){
       setMode('dark');
       document.body.style.backgroundColor = '#042743';
@@ -40,11 +49,16 @@ function App() {
       //   document.title = "Install TextUtils Now";
       // }, 1500);  
     }
-    else{
+    else if(mode === 'dark'){
       setMode('light');
       document.body.style.backgroundColor = 'white';
       setAlertMessage("Light mode has been enabled", "success");
       document.title = "TextUtils - Light Mode";
+    }
+    else{
+      document.body.classList.add('bg-' + cls);
+      setMode(cls);
+      setAlertMessage(`${cls.charAt(0).toUpperCase() + cls.slice(1)} mode has been enabled`, "success");
     }
   } 
   return (
@@ -55,7 +69,7 @@ function App() {
         <div className="container" my-3>
           {/* <TextForm setAlertMessage={setAlertMessage} heading="Enter the text to analyze" mode={mode}/> */}
           <Routes>
-            <Route path="/about" element={<About />} />
+            <Route path="/about" element={<About mode={mode} />} />
             <Route path="/" element={<TextForm setAlertMessage={setAlertMessage} heading="Enter the text to analyze" mode={mode}/>} />
           </Routes>
         </div>

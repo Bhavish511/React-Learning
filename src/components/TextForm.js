@@ -20,9 +20,7 @@ export default function TextForm(props) {
         props.setAlertMessage("Text Cleared!", "success");
     }
     const handleCopy = () => {
-        var text = document.getElementById("myBox");
-        text.select();
-        navigator.clipboard.writeText(text.value);
+        navigator.clipboard.writeText(text);
         props.setAlertMessage("Copied to Clipboard!", "success");
     }
 
@@ -43,18 +41,18 @@ export default function TextForm(props) {
         <div className="container" style={{color: props.mode==='dark' ?'white':'#042743'}}>
             <h1>{props.heading}</h1>    
             <div className="mb-3">
-            <textarea className="form-control" id="myBox" rows="8" style={{backgroundColor: props.mode==='dark' ?'gray':'white', color: props.mode==='dark' ?'white':'#042743'}} value={text} onChange={handleOnChange}></textarea>
+            <textarea className="form-control" id="myBox" rows="8" style={{backgroundColor: props.mode==='dark' ?'#13466e':'white', color: props.mode==='dark' ?'white':'#042743'}} value={text} onChange={handleOnChange}></textarea>
             </div>
-            <button className="btn btn-success mx-1" onClick={handleUpClick}>Convert to Uppercase</button>
-            <button className="btn btn-success mx-1" onClick={handleLoClick}>Convert to Lowercase</button>
-            <button className="btn btn-success mx-1" onClick={handleCleClick}>Clear Text</button>
-            <button className="btn btn-success mx-1" onClick={handleCopy}>Copy Text</button>
-            <button className="btn btn-success mx-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+            <button className="btn btn-success mx-1 my-1" onClick={handleUpClick}>Convert to Uppercase</button>
+            <button className="btn btn-success mx-1 my-1" onClick={handleLoClick}>Convert to Lowercase</button>
+            <button className="btn btn-success mx-1 my-1" onClick={handleCleClick}>Clear Text</button>
+            <button className="btn btn-success mx-1 my-1" onClick={handleCopy}>Copy Text</button>
+            <button className="btn btn-success mx-1 my-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
         </div>
         <div className="container" style={{color: props.mode==='dark' ?'white':'#042743'}}>
             <h2>Your text summary</h2>
-            <p>{text.trim().length ? text.trim().split(" ").length : 0} words and {text.length} characters</p>
-            <p>{0.008 * (text.trim().length ? text.trim().split(" ").length : 0)} Minutes read</p>
+            <p>{text.trim().length ? text.trim().split(/\s+/).length : 0} words and {text.length} characters</p>
+            <p>{0.008 * (text.trim().length ? text.trim().split(/\s+/).length : 0)} Minutes read</p>
             <h2>Preview</h2>
             <p>{text.length>0 ? text : "Nothing to preview!"}</p>
             
